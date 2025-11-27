@@ -1,102 +1,89 @@
-/* style.css */
-
-/* --- Pengaturan Dasar Body --- */
+/* Styling Umum untuk Body */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7f6; /* Warna latar belakang halaman */
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Warna latar belakang ringan */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Memastikan form di tengah vertikal */
+    justify-content: center; /* Posisikan form di tengah horizontal */
+    align-items: center; /* Posisikan form di tengah vertikal */
+    min-height: 100vh; /* Pastikan tinggi body minimal setinggi viewport */
+    margin: 0;
 }
 
-/* --- Container Utama Form --- */
+/* Styling Kontainer Form */
 .container {
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Latar belakang putih untuk kontainer */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     width: 100%;
-    max-width: 450px;
+    max-width: 500px; /* Batasi lebar maksimum kontainer */
 }
 
-/* --- Judul Form --- */
+/* Styling Judul */
 h2 {
     text-align: center;
-    color: #004d99; /* Warna biru khas BMKG/instansi */
+    color: #333;
     margin-bottom: 25px;
-    border-bottom: 2px solid #004d99;
+    border-bottom: 2px solid #007bff; /* Garis biru di bawah judul */
     padding-bottom: 10px;
 }
 
-/* --- Label Input --- */
+/* Styling Label */
 label {
-    display: block;
-    margin-top: 15px;
+    display: block; /* Membuat label berada di barisnya sendiri */
     margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 0.95em;
     color: #555;
+    font-weight: bold;
 }
 
-/* --- Kotak Input, Textarea, dan Select --- */
-input[type="text"], 
-textarea, 
-select {
+/* Styling Input, Select, dan Textarea */
+input[type="text"],
+select,
+textarea {
     width: 100%;
     padding: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Padding tidak menambah lebar total */
-    font-size: 1em;
+    border-radius: 4px;
+    box-sizing: border-box; /* Pastikan padding dan border termasuk dalam lebar */
+    font-size: 16px;
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus, 
-textarea:focus, 
-select:focus {
-    border-color: #007bff; /* Garis biru saat fokus */
-    outline: none;
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff; /* Border biru saat elemen fokus */
+    outline: none; /* Hapus outline default browser */
 }
 
+/* Styling Textarea */
 textarea {
-    resize: vertical; /* Hanya boleh diubah ukurannya secara vertikal */
+    resize: vertical; /* Hanya izinkan resize secara vertikal */
 }
 
-/* --- Tombol Kirim --- */
-button {
-    width: 100%;
-    background-color: #007bff;
+/* Styling Tombol Submit/Download */
+#downloadCsvButton {
+    background-color: #28a745; /* Warna hijau untuk tombol download */
     color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 25px;
-    font-size: 1.1em;
-    font-weight: bold;
+    width: 100%;
+    font-size: 18px;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Hover Effect pada Tombol */
+#downloadCsvButton:hover {
+    background-color: #1e7e34; /* Warna hijau yang sedikit lebih gelap saat di-hover */
 }
 
-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-/* --- Pesan Status (Sukses/Error) --- */
-#status-message {
-    margin-top: 20px;
-    padding: 12px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    display: none; /* Awalnya tersembunyi, diaktifkan oleh JavaScript */
+/* Opsi: Responsivitas Dasar */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
 }
