@@ -1,45 +1,55 @@
 document.getElementById('maintenanceForm').addEventListener('submit', function(event) {
+    // Mencegah formulir untuk melakukan submit standar/reload halaman
     event.preventDefault(); 
 
-    // GANTI INI DENGAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA
-    const apiUrl = 'https://script.google.com/macros/s/AKfycbxd0Fo3X0J9kjWqCOERe2CTpewbRJQasBn_5lFvupIkbGtrg_F92eJeXL-8N7us7G8/exec'; 
+    // 1. Ambil Data dari Form
+    const kode_alat = document.getElementById('kode_alat').value;
+    const lokasi = document.getElementById('lokasi').value;
+    const teknisi = document.getElementById('teknisi').value;
+    // Ganti newline dengan spasi atau karakter lain agar deskripsi tidak merusak format CSV
+    const deskripsi = document.getElementById('deskripsi').value.replace(/\n/g, ' ').trim();
+    // Tambahkan kolom Tanggal dan Waktu saat ini
+    const tanggal_waktu = new Date().toLocaleString('id-ID'); 
+
+    // 2. Tentukan Header dan Baris Data
+    const header = [
+        "Tanggal_Waktu", 
+        "Kode_Alat", 
+        "Lokasi_Unit", 
+        "Nama_Teknisi", 
+        "Deskripsi_Pekerjaan"
+    ];
     
-    const form = event.target;
-    const formData = new FormData(form);
-    const submitButton = document.getElementById('submitButton');
-    const statusMessage = document.getElementById('status-message');
+    // Pastikan data diapit tanda kutip (") untuk menangani koma di dalam Deskripsi Pekerjaan
+    const dataRow = [
+        `"${tanggal_waktu}"`,
+        `"${kode_alat}"`,
+        `"${lokasi}"`,
+        `"${teknisi}"`,
+        `"${deskripsi}"` 
+    ];
 
-    // Tampilkan status loading
-    submitButton.textContent = 'Mengirim...';
-    submitButton.disabled = true;
-    statusMessage.style.display = 'none';
+    // Gabungkan Header dan Data menjadi konten CSV
+    // \r\n adalah kode untuk baris baru (newline) yang umum digunakan pada CSV
+    const csvContent = header.join(',') + '\r\n' + dataRow.join(',');
 
-    // Kirim data menggunakan Fetch API
-    fetch(apiUrl, {
-        method: 'POST',
-        body: formData 
-    })
-    .then(response => {
-        if (response.ok) return response.text();
-        throw new Error('Gagal terhubung ke Google API.');
-    })
-    .then(text => {
-        if (text === 'SUCCESS') {
-            statusMessage.textContent = '? Data berhasil disimpan di Google Sheets!';
-            statusMessage.style.backgroundColor = '#d4edda';
-            form.reset(); 
-        } else {
-             throw new Error('Apps Script mengembalikan respon tidak terduga.');
-        }
-    })
-    .catch(error => {
-        statusMessage.textContent = `? Terjadi Kesalahan: ${error.message}`;
-        statusMessage.style.backgroundColor = '#f8d7da';
-        console.error('Error:', error);
-    })
-    .finally(() => {
-        statusMessage.style.display = 'block';
-        submitButton.textContent = 'Kirim Data ke Spreadsheet';
-        submitButton.disabled = false;
-    });
+    // 3. Buat Blob dan Link Download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    
+    // Tentukan nama file yang akan didownload
+    // Anda dapat menyertakan tanggal/waktu dalam nama file agar unik
+    const filename = `data_pemeliharaan_${new Date().getTime()}.csv`;
+    downloadLink.setAttribute('download', filename);
+
+    // 4. Picu Download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    
+    // 5. Opsi: Reset form setelah download
+    this.reset();
 });
