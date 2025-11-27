@@ -2,7 +2,7 @@ document.getElementById('maintenanceForm').addEventListener('submit', function(e
     event.preventDefault(); 
 
     // GANTI INI DENGAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA
-    const apiUrl = 'https://script.google.com/macros/s/AKfycbxh-d-8c5VmqLeBl_RFfLBXVpse0ACYlAfPIVL0hsEbTkWCL4PPzGdo-rA6pn6rzTlC/exec'; 
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbxd0Fo3X0J9kjWqCOERe2CTpewbRJQasBn_5lFvupIkbGtrg_F92eJeXL-8N7us7G8/exec'; 
     
     const form = event.target;
     const formData = new FormData(form);
