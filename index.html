@@ -1,28 +1,257 @@
-<h2>Form Pemeliharaan AWOS BMKG Supadio</h2>
-<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemeliharaan AWOS BMKG Supadio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Form Pemeliharaan AWOS BMKG Supadio</h2>
+
         <form id="maintenanceForm">
-            <label for="kode_alat">Kode Alat:</label>
-            <input type="text" id="kode_alat" name="kode_alat" required>
 
-            <label for="lokasi">Lokasi/Unit:</label>
-            <select id="lokasi" name="lokasi" required>
-                <option value=""></option>                
-                <option value="AWOS M">AWOS M</option>
-                <option value="AWOS 15">AWOS 15</option>
-                <option value="AWOS 33">AWOS 33</option>                
-                </select>
+            <fieldset class="maintenance-block">
+                <legend class="block-title">RUNWAY 33</legend>
 
-            <label for="teknisi">Nama Teknisi:</label>
-            <input type="text" id="teknisi" name="teknisi" required>
+                <div class="date-time-row">
+                    <label for="tgl_33">TGL/BLN/THN:</label>
+                    <input type="date" id="tgl_33" name="tgl_33" value="2025-11-04" required>
+                    <label for="waktu_33">WAKTU INSPEKSI:</label>
+                    <input type="time" id="waktu_33" name="waktu_33" value="08:00" required>
+                </div>
+
+                <h4 class="table-subtitle">Data Sensor dan Status</h4>
+                <div style="overflow-x:auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">SENSOR DAN PENUNJANG</th>
+                                <th colspan="3">MARS</th>
+                                <th rowspan="2">ORG HUJAN</th>
+                                <th rowspan="2">PRESENT WEATHER</th>
+                                <th colspan="2">WIND SENSOR</th>
+                                <th rowspan="2">CEILO METER</th>
+                                <th rowspan="2">BLOWER CEILO METER</th>
+                                <th rowspan="2">BP KOR OFFSET</th>
+                                <th rowspan="2">STATUS VIS</th>
+                                <th rowspan="2">POWER (V)</th>
+                                <th colspan="4">VISIBILLITY</th>
+                                <th rowspan="2">PANEL / TEG. PLN</th>
+                            </tr>
+                            <tr>
+                                <th>TEMPERATURE</th>
+                                <th>RH (PERSEN)</th>
+                                <th>VCC (VOLT DC)</th>
+                                <th>DIRECT (O)</th>
+                                <th>SPEED (KT)</th>
+                                <th>MODE D 00</th>
+                                <th>MODE D 01</th>
+                                <th>MODE D 11</th>
+                                <th>MODE D 10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>STATUS DCP</td>
+                                <td><input type="text" name="mars_temp_8_33"/></td>
+                                <td><input type="text" name="mars_rh_8_33"/></td>
+                                <td><input type="text" name="mars_vcc_8_33"/></td>
+                                <td><input type="text" name="mars_org_8_33"/></td>
+                                <td><input type="text" name="present_weather_8_33"/></td>
+                                <td><input type="text" name="wind_direct_8_33"/></td>
+                                <td><input type="text" name="wind_speed_8_33"/></td>
+                                <td><input type="text" name="ceilo_meter_8_33"/></td>
+                                <td><input type="text" name="blower_ceilo_meter_8_33"/></td> 
+                                <td><input type="text" name="bp_kor_offset_8_33"/></td>
+                                <td><input type="text" name="status_8_33"/></td>
+                                <td><input type="text" name="power_8_33"/></td>
+                                <td><input type="text" name="vis_d00_8_33"/></td>
+                                <td><input type="text" name="vis_001_8_33"/></td>
+                                <td><input type="text" name="vis_d11_8_33"/></td>
+                                <td><input type="text" name="vis_d10_8_33"/></td>
+                                <td><input type="text" name="panel_teg_pln_8_33"/></td>
+                            </tr>
+                            <tr>
+                                <td>PENGUKURAN</td>
+                                <td><input type="text" name="mars_temp_8_33"/></td>
+                                <td><input type="text" name="mars_rh_8_33"/></td>
+                                <td><input type="text" name="mars_vcc_8_33"/></td>                                                           
+                             </tr>
             
-            <label for="deskripsi">Deskripsi Pekerjaan:</label>
-            <textarea id="deskripsi" name="deskripsi" rows="4" required></textarea>
+                           
+                        </tbody>
+                    </table>
+                </div>
 
-            <button type="submit" id="downloadCsvButton">Download CSV</button>
+                <h4 class="table-subtitle">ETS</h4>
+                <div class="usaha-pemeliharaan">
+                    <table class="grounding-table">
+                        <thead>
+                            <tr>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Grounding: <span class="grounding-value">Tidak diukur</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>L-G = <input type="text" name="input_lg_33"/></td>
+                                <td>L-G = <input type="text" name="output_lg_33"/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>L-N = <input type="text" name="input_ln_33"/></td>
+                                <td>L-N = <input type="text" name="output_ln_33"/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G-N = <input type="text" name="input_gn_33"/></td>
+                                <td>G-N = <input type="text" name="output_gn_33"/></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </fieldset>
+            
+            <hr class="separator"/>
+
+            <fieldset class="maintenance-block">
+                <legend class="block-title">RUNWAY 15</legend>
+
+                <div class="date-time-row">
+                    <label for="tgl_15">TGL/BLN/THN:</label>
+                    <input type="date" id="tgl_15" name="tgl_15" value="2025-11-04" required>
+                    <label for="waktu_15">WAKTU INSPEKSI:</label>
+                    <input type="time" id="waktu_15" name="waktu_15" value="08:00" required>
+                    
+                </div>
+
+               <h4 class="table-subtitle">Data Sensor dan Status</h4>
+                <div style="overflow-x:auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">SENSOR DAN PENUNJANG</th>
+                                <th colspan="3">MARS</th>
+                                <th rowspan="2">ORG HUJAN</th>
+                                <th rowspan="2">PRESENT WEATHER</th>
+                                <th colspan="2">WIND SENSOR</th>
+                                <th rowspan="2">CEILO METER</th>
+                                <th rowspan="2">BLOWER CEILO METER</th>
+                                <th rowspan="2">BP KOR OFFSET</th>
+                                <th rowspan="2">STATUS VIS</th>
+                                <th rowspan="2">POWER (V)</th>                                
+                                <th colspan="4">VISIBILLITY</th>
+                                <th rowspan="2">ALS VISIBILITY</th>
+                                <th rowspan="2">PANEL / TEG. PLN</th>
+                            </tr>
+                            <tr>
+                                <th>TEMPERATURE</th>
+                                <th>RH (PERSEN)</th>
+                                <th>VCC (VOLT DC)</th>
+                                <th>DIRECT (O)</th>
+                                <th>SPEED (KT)</th>
+                                <th>MODE D 00</th>
+                                <th>MODE D 01</th>
+                                <th>MODE D 11</th>
+                                <th>MODE D 10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>STATUS DCP</td>
+                                <td><input type="text" name="mars_temp_8_15"/></td>
+                                <td><input type="text" name="mars_rh_8_15"/></td>
+                                <td><input type="text" name="mars_vcc_8_15"/></td>
+                                <td><input type="text" name="mars_org_8_15"/></td>
+                                <td><input type="text" name="present_weather_8_15"/></td>
+                                <td><input type="text" name="wind_direct_8_15"/></td>
+                                <td><input type="text" name="wind_speed_8_15"/></td>
+                                <td><input type="text" name="ceilo_meter_8_15"/></td>
+                                <td><input type="text" name="blower_ceilo_meter_8_15"/></td> <td><input type="text" name="bp_kor_offset_8_15"/></td>
+                                <td><input type="text" name="status_8_15"/></td>
+                                <td><input type="text" name="power_8_15"/></td>
+                                <td><input type="text" name="vis_d00_8_15"/></td>
+                                <td><input type="text" name="vis_001_8_15"/></td>
+                                <td><input type="text" name="vis_d11_8_15"/></td>
+                                <td><input type="text" name="vis_d10_8_15"/></td>
+                                <td><input type="text" name="als_8_15"/></td>
+                                <td><input type="text" name="panel_teg_pln_8_15"/></td>
+                            </tr>
+                            <tr>
+                                <td>PENGUKURAN</td>
+                                 <td><input type="text" name="mars_temp_8_15"/></td>
+                                <td><input type="text" name="mars_rh_8_15"/></td>
+                                <td><input type="text" name="mars_vcc_8_15"/></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="table-subtitle">ETS</h4>
+                <div class="usaha-pemeliharaan">
+                    <table class="grounding-table">
+                        <thead>
+                            <tr>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Grounding: <span class="grounding-value">Tidak diukur</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>L-G = <input type="text" name="input_lg_15"/></td>
+                                <td>L-G = <input type="text" name="output_lg_15"/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>L-N = <input type="text" name="input_ln_15"/></td>
+                                <td>L-N = <input type="text" name="output_ln_15"/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G-N = <input type="text" name="input_gn_15"/></td>
+                                <td>G-N = <input type="text" name="output_gn_15"/></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </fieldset>
+
+            <hr class="separator"/>
+
+            <div class="signatures">
+                <div class="signature-box">
+                    <label>MENGETAHUI:</label>
+                    <p>KOORDINATOR OBSERVASI</p>
+                    <p>STASIUN SUPADIO PONTIANAK</p>
+                    
+                    <p>(DEAN G.H. MARO)</p>
+                </div>
+                <div class="signature-box">
+                    <label>TEKNISI:</label>
+                    <ol>
+                        <li><input type="text" name="teknisi_1" value="TEKNISI 1" placeholder="Teknisi 1"/></li>
+                        <li><input type="text" name="teknisi_2" value="TEKNISI 2" placeholder="Teknisi 2"/></li>
+                    </ol>
+                </div>
+            </div>
+
+
+           <div class="action-buttons">
+                <button type="button" id="downloadCsvButton" class="secondary-button">DOWNLOAD CSV</button>
+            </div>
         </form>
+    </div>
 
-        </div>
-    
     <script src="app.js"></script> 
 </body>
 </html>
