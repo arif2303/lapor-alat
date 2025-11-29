@@ -1,77 +1,39 @@
-/* Mengatur font default menjadi Inter */
-html {
+/* Menggunakan font Inter sebagai default */
+body {
     font-family: 'Inter', sans-serif;
+    background-color: #f0f4f8; /* Light background for the whole page */
 }
 
-/* Custom styling untuk form agar terlihat bagus */
-#maintenanceForm label {
-    /* Tambah font-semibold */
-    /* block text-sm font-medium text-gray-700 mt-4 mb-1 font-semibold */
-    display: block;
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* font-medium */
-    color: #4b5563; /* text-gray-700 */
-    margin-top: 1rem; /* mt-4 */
-    margin-bottom: 0.25rem; /* mb-1 */
-    font-weight: 600; /* font-semibold */
+/* Custom CSS untuk mengatur layout form */
+#maintenanceForm {
+    display: grid;
+    gap: 1.5rem; /* Space between rows */
 }
 
-#maintenanceForm input, 
-#maintenanceForm select, 
+/* Mengatur input, select, dan textarea agar lebar penuh */
+#maintenanceForm input[type="text"],
+#maintenanceForm select,
 #maintenanceForm textarea {
-    /* Mengubah warna fokus ring menjadi Biru Standard (setara #007bff) */
-    /* block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out */
-    display: block;
     width: 100%;
-    padding: 0.5rem 0.75rem; /* px-3 py-2 */
-    border: 1px solid #d1d5db; /* border border-gray-300 */
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1; /* border-slate-300 */
     border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-    color: #9ca3af; /* placeholder-gray-400 */
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* transition duration-150 ease-in-out */
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-#maintenanceForm input:focus, 
-#maintenanceForm select:focus, 
+#maintenanceForm input[type="text"]:focus,
+#maintenanceForm select:focus,
 #maintenanceForm textarea:focus {
-    /* focus:outline-none focus:ring-blue-500 focus:border-blue-500 */
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    --tw-ring-offset-width: 0px;
-    --tw-ring-offset-color: #fff;
-    --tw-ring-color: #3b82f6; /* ring-blue-500 */
-    border-color: #3b82f6; /* border-blue-500 */
-    box-shadow: 0 0 0 1px var(--tw-ring-color);
+    border-color: #3b82f6; /* ring-blue-500 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    outline: none;
 }
 
-
-#maintenanceForm button {
-    /* Mengubah warna tombol menjadi Hijau (setara #28a745) */
-    /* w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-6 transition duration-150 ease-in-out */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem 1rem; /* py-2 px-4 */
-    border: 1px solid transparent;
-    border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-    font-size: 1rem; /* text-base */
-    font-weight: 500; /* font-medium */
-    color: #fff;
-    background-color: #059669; /* bg-green-600 */
-    margin-top: 1.5rem; /* mt-6 */
-    transition: background-color 0.15s ease-in-out;
-}
-
-#maintenanceForm button:hover {
-    background-color: #047857; /* hover:bg-green-700 */
-}
-
-#maintenanceForm button:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    --tw-ring-offset-width: 2px;
-    --tw-ring-offset-color: #fff;
-    --tw-ring-color: #10b981; /* ring-green-500 */
-    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+/* Styling untuk label */
+#maintenanceForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600; /* semibold */
+    color: #1e293b; /* slate-800 */
 }
