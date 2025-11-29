@@ -1,7 +1,19 @@
 /* Menggunakan font Inter sebagai default */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f0f4f8; /* Light background for the whole page */
+    /* Ubah background menjadi putih bersih untuk kontras terbaik di luar ruangan */
+    background-color: #ffffff;
+    color: #1e293b; /* Warna teks utama gelap (slate-800) */
+    padding: 1rem; /* Sedikit padding agar tidak menempel di tepi */
+}
+
+/* --- Container Form Utama --- */
+.form-container {
+    /* Tambahkan container jika form Anda dibungkus. Beri background terang/putih */
+    background-color: #f8fafc; /* light blue-ish white */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
 /* Custom CSS untuk mengatur layout form */
@@ -10,30 +22,74 @@ body {
     gap: 1.5rem; /* Space between rows */
 }
 
-/* Mengatur input, select, dan textarea agar lebar penuh */
+/* --- Input Fields (Text, Select, Textarea) --- */
 #maintenanceForm input[type="text"],
 #maintenanceForm select,
 #maintenanceForm textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #cbd5e1; /* border-slate-300 */
+    padding: 0.85rem; /* Sedikit lebih besar untuk kemudahan sentuhan */
+    border: 1px solid #94a3b8; /* border-slate-400, lebih tebal sedikit */
     border-radius: 0.5rem; /* rounded-lg */
     transition: all 0.2s;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    background-color: #fefefe; /* Pastikan input background sangat terang */
 }
 
+/* Fokus - Gunakan Biru yang lebih mencolok */
 #maintenanceForm input[type="text"]:focus,
 #maintenanceForm select:focus,
 #maintenanceForm textarea:focus {
-    border-color: #3b82f6; /* ring-blue-500 */
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    border-color: #10b981; /* Biru cerah yang menyerupai hijau (Emerald 500) */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4); /* Shadow Biru/Hijau yang jelas */
     outline: none;
 }
 
-/* Styling untuk label */
+/* --- Styling untuk Label --- */
 #maintenanceForm label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 600; /* semibold */
-    color: #1e293b; /* slate-800 */
+    font-weight: 700; /* Extra bold untuk keterbacaan */
+    color: #0f172a; /* Warna teks sangat gelap (slate-900) */
+}
+
+/* --- Styling untuk Tombol (Asumsi Anda punya tombol Submit) --- */
+.submit-button {
+    background-color: #3b82f6; /* Biru yang cerah (Blue 500) */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px #1d4ed8; /* Biru gelap untuk efek 3D */
+    text-transform: uppercase;
+}
+
+.submit-button:hover {
+    background-color: #2563eb; /* Biru sedikit lebih gelap saat hover */
+    transform: translateY(-1px);
+    box-shadow: 0 5px #1d4ed8;
+}
+
+.submit-button:active {
+    background-color: #1d4ed8;
+    transform: translateY(3px); /* Efek 'klik' */
+    box-shadow: 0 1px #1d4ed8;
+}
+
+/* Contoh Tombol Sekunder (Menggunakan Hijau) */
+.secondary-button {
+    background-color: #10b981; /* Hijau cerah (Emerald 500) */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px #047857; /* Hijau gelap */
+}
+
+.secondary-button:hover {
+    background-color: #059669;
 }
