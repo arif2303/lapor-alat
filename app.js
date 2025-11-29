@@ -1,55 +1,103 @@
-document.getElementById('maintenanceForm').addEventListener('submit', function(event) {
-    // Mencegah formulir untuk melakukan submit standar/reload halaman
-    event.preventDefault(); 
+// app.js
 
-    // 1. Ambil Data dari Form
-    const kode_alat = document.getElementById('kode_alat').value;
-    const lokasi = document.getElementById('lokasi').value;
-    const teknisi = document.getElementById('teknisi').value;
-    // Ganti newline dengan spasi atau karakter lain agar deskripsi tidak merusak format CSV
-    const deskripsi = document.getElementById('deskripsi').value.replace(/\n/g, ' ').trim();
-    // Tambahkan kolom Tanggal dan Waktu saat ini
-    const tanggal_waktu = new Date().toLocaleString('id-ID'); 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const form = document.getElementById('maintenanceForm');
+    const downloadButton = document.getElementById('downloadCsvButton');
 
-    // 2. Tentukan Header dan Baris Data
-    const header = [
-        "Tanggal_Waktu", 
-        "Kode_Alat", 
-        "Lokasi_Unit", 
-        "Nama_Teknisi", 
-        "Deskripsi_Pekerjaan"
-    ];
-    
-    // Pastikan data diapit tanda kutip (") untuk menangani koma di dalam Deskripsi Pekerjaan
-    const dataRow = [
-        `"${tanggal_waktu}"`,
-        `"${kode_alat}"`,
-        `"${lokasi}"`,
-        `"${teknisi}"`,
-        `"${deskripsi}"` 
-    ];
+    /**
+     * Mengambil semua data input dari formulir dan mengembalikannya sebagai objek.
+     * @returns {Object} Objek data formulir.
+     */
+    function getFormData() {
+        const formData = {};
+        const elements = form.querySelectorAll('input, select, textarea');
+        
+        elements.forEach(element => {
+            if (element.name) {
+                // Membersihkan nilai dari baris baru atau koma agar aman untuk CSV
+                const cleanValue = element.value.replace(/(\r\n|\n|\r|,)/gm, " ").trim();
+                formData[element.name] = cleanValue;
+            }
+        });
+        
+        // Menambahkan data tetap (non-input field)
+        formData['koordinator'] = 'DEAN G.H. MARO';
+        formData['teknisi_1_nama'] = formData['teknisi_1'];
+        formData['teknisi_2_nama'] = formData['teknisi_2'];
+        
+        // Opsional: Hapus input nama teknisi asli jika sudah di-rename
+        delete formData['teknisi_1'];
+        delete formData['teknisi_2'];
 
-    // Gabungkan Header dan Data menjadi konten CSV
-    // \r\n adalah kode untuk baris baru (newline) yang umum digunakan pada CSV
-    const csvContent = header.join(',') + '\r\n' + dataRow.join(',');
+        // Menambahkan header untuk data yang tidak diisi (misalnya: Grounding)
+        formData['grounding_33'] = 'Tidak diukur';
+        formData['grounding_15'] = 'Tidak diukur';
+        
+        return formData;
+    }
 
-    // 3. Buat Blob dan Link Download
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    
-    const downloadLink = document.createElement('a');
-    downloadLink.href = url;
-    
-    // Tentukan nama file yang akan didownload
-    // Anda dapat menyertakan tanggal/waktu dalam nama file agar unik
-    const filename = `data_pemeliharaan_${new Date().getTime()}.csv`;
-    downloadLink.setAttribute('download', filename);
+    /**
+     * Mengubah objek data menjadi format string CSV.
+     * @param {Object} data - Objek data formulir.
+     * @returns {string} String dalam format CSV.
+     */
+    function convertToCsv(data) {
+        // Ambil semua kunci sebagai header CSV
+        const headers = Object.keys(data);
+        // Ambil semua nilai sebagai baris data CSV
+        const values = Object.values(data);
+        
+        // Gabungkan header dan nilai. Nilai yang mengandung koma atau kutipan 
+        // harus diapit oleh kutipan ganda ("") - tapi untuk penyederhanaan, 
+        // kita sudah membersihkan nilai di getFormData().
+        const headerCsv = headers.join(';'); // Menggunakan semicolon sebagai delimiter untuk keamanan
+        const dataCsv = values.join(';');
+        
+        // Gabungkan header dan data, dipisahkan oleh baris baru
+        return headerCsv + '\n' + dataCsv;
+    }
 
-    // 4. Picu Download
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    
-    // 5. Opsi: Reset form setelah download
-    this.reset();
+    /**
+     * Memicu proses download string CSV sebagai file.
+     * @param {string} csvString - String CSV yang akan diunduh.
+     * @param {string} filename - Nama file.
+     */
+    function downloadCsv(csvString, filename) {
+        // Membuat Blob dengan tipe MIME CSV dan charset UTF-8
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        
+        const link = document.createElement("a");
+        if (link.download !== undefined) { 
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Membersihkan URL objek untuk membebaskan memori
+            URL.revokeObjectURL(url);
+        } else {
+            alert("Browser Anda tidak mendukung download otomatis. Silakan gunakan browser modern.");
+        }
+    }
+
+    // Event listener utama saat tombol download diklik
+    downloadButton.addEventListener('click', () => {
+        const data = getFormData();
+        
+        // Menggunakan tanggal dari RWY 33 untuk nama file
+        const tgl = data['tgl_33'].replace(/-/g, ''); 
+        const filename = `Formulir_AWOS_Maint_${tgl}.csv`;
+
+        const csvData = convertToCsv(data);
+        
+        downloadCsv(csvData, filename);
+        
+        // Pemberitahuan setelah unduhan
+        console.log(`Data formulir berhasil diunduh sebagai: ${filename}`);
+    });
+
 });
