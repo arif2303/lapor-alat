@@ -1,95 +1,277 @@
-/* Menggunakan font Inter sebagai default */
-body {
-    font-family: 'Inter', sans-serif;
-    /* Ubah background menjadi putih bersih untuk kontras terbaik di luar ruangan */
-    background-color: #ffffff;
-    color: #1e293b; /* Warna teks utama gelap (slate-800) */
-    padding: 1rem; /* Sedikit padding agar tidak menempel di tepi */
-}
+<style>
+        /* CSS yang sudah ada (tidak saya tampilkan di sini agar kode tidak terlalu panjang, tetapi CSS di bawah ini adalah CSS lengkap dari respons sebelumnya) */
+        
+        /* --- CSS UTAMA (Disesuaikan dengan Biru & Hijau) --- */
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            padding: 1rem;
+        }
+        
+        .form-container {
+            background-color: #f8fafc;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
 
-/* --- Container Form Utama --- */
-.form-container {
-    /* Tambahkan container jika form Anda dibungkus. Beri background terang/putih */
-    background-color: #f8fafc; /* light blue-ish white */
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-}
+        #maintenanceForm {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        #maintenanceForm label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
 
-/* Custom CSS untuk mengatur layout form */
-#maintenanceForm {
-    display: grid;
-    gap: 1.5rem; /* Space between rows */
-}
+        #maintenanceForm input[type="text"],
+        #maintenanceForm input[type="date"],
+        #maintenanceForm input[type="time"],
+        #maintenanceForm select,
+        #maintenanceForm textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid #94a3b8;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            background-color: #fefefe;
+            box-sizing: border-box;
+        }
+        
+        #maintenanceForm input[type="text"]:focus,
+        #maintenanceForm input[type="date"]:focus,
+        #maintenanceForm input[type="time"]:focus,
+        #maintenanceForm select:focus,
+        #maintenanceForm textarea:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-direction: column;
+        }
 
-/* --- Input Fields (Text, Select, Textarea) --- */
-#maintenanceForm input[type="text"],
-#maintenanceForm select,
-#maintenanceForm textarea {
-    width: 100%;
-    padding: 0.85rem; /* Sedikit lebih besar untuk kemudahan sentuhan */
-    border: 1px solid #94a3b8; /* border-slate-400, lebih tebal sedikit */
-    border-radius: 0.5rem; /* rounded-lg */
-    transition: all 0.2s;
-    background-color: #fefefe; /* Pastikan input background sangat terang */
-}
+        /* --- Gaya Tombol (Tidak Berubah) --- */
+        .submit-button {
+            background-color: #3b82f6; 
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px #1d4ed8; 
+            text-transform: uppercase;
+        }
 
-/* Fokus - Gunakan Biru yang lebih mencolok */
-#maintenanceForm input[type="text"]:focus,
-#maintenanceForm select:focus,
-#maintenanceForm textarea:focus {
-    border-color: #10b981; /* Biru cerah yang menyerupai hijau (Emerald 500) */
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4); /* Shadow Biru/Hijau yang jelas */
-    outline: none;
-}
+        .submit-button:hover {
+            background-color: #2563eb; 
+            transform: translateY(-1px);
+            box-shadow: 0 5px #1d4ed8;
+        }
 
-/* --- Styling untuk Label --- */
-#maintenanceForm label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700; /* Extra bold untuk keterbacaan */
-    color: #0f172a; /* Warna teks sangat gelap (slate-900) */
-}
+        .submit-button:active {
+            background-color: #1d4ed8;
+            transform: translateY(3px); 
+            box-shadow: 0 1px #1d4ed8;
+        }
 
-/* --- Styling untuk Tombol (Asumsi Anda punya tombol Submit) --- */
-.submit-button {
-    background-color: #3b82f6; /* Biru yang cerah (Blue 500) */
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 4px #1d4ed8; /* Biru gelap untuk efek 3D */
-    text-transform: uppercase;
-}
+        .secondary-button {
+            background-color: #10b981; 
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px #047857;
+        }
 
-.submit-button:hover {
-    background-color: #2563eb; /* Biru sedikit lebih gelap saat hover */
-    transform: translateY(-1px);
-    box-shadow: 0 5px #1d4ed8;
-}
+        .secondary-button:hover {
+            background-color: #059669;
+        }
 
-.submit-button:active {
-    background-color: #1d4ed8;
-    transform: translateY(3px); /* Efek 'klik' */
-    box-shadow: 0 1px #1d4ed8;
-}
+        /* --- CSS Khusus Tabel (Disesuaikan Agar Sama Persis) --- */
+        
+        .separator {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #a3a3a3, rgba(0, 0, 0, 0));
+            margin: 1.5rem 0;
+        }
+        
+        .maintenance-block {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .block-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #3b82f6;
+            padding: 0 0.5rem;
+        }
+        
+        .table-subtitle {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #10b981;
+        }
+        
+        .date-time-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .date-time-row label {
+            white-space: nowrap; 
+            margin-bottom: 0;
+        }
+        .date-time-row input {
+            width: auto; 
+            min-width: 150px;
+            padding: 0.5rem;
+            flex-grow: 1; 
+        }
+        .wib-label {
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        /* Modifikasi Inti untuk Tabel Agar Mirip Excel */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.75rem; /* Ukuran font lebih kecil */
+            text-align: center;
+            overflow-x: auto; 
+            display: block;
+        }
+        /* Border Tebal dan Hitam Solid */
+        .data-table th, .data-table td {
+            border: 3px solid #000000; /* Border hitam solid */
+            padding: 0.8rem 0.8rem; /* Padding sangat kecil */
+            white-space: nowrap;
+            height: 30px; /* Tinggi baris tetap */
+        }
+        
+        /* Header Kuning Solid */
+        .data-table thead th {
+            background-color: #ffcc00; /* Kuning */
+            font-weight: 900; /* Bold */
+            color: #000000;
+            vertical-align: middle; /* Rata tengah vertikal */
+            padding: 0.5rem 0.1rem;
+        }
+        
+        /* Kolom SENSOR DAN PENUNJANG - Latar belakang abu-abu seperti Excel */
+        .data-table tbody td:first-child {
+            text-align: left;
+            font-weight: 600;
+            background-color: #cccccc; /* Abu-abu muda */
+            padding-left: 0.5rem;
+        }
+        
+        /* Input Field di dalam Sel */
+        .data-table td input[type="text"],
+        .data-table td input[type="number"] { /* Tambahkan type="number" di sini */
+            width: 100%;
+            border: none;
+            padding: 0.5rem; /* Padding sangat kecil */
+            box-shadow: none;
+            text-align: center;
+            background-color: transparent;
+            font-size: 1rem;
+        }
+        
+        .data-table tbody tr td[colspan] input {
+             text-align: left;
+             width: 100%;
+        }
 
-/* Contoh Tombol Sekunder (Menggunakan Hijau) */
-.secondary-button {
-    background-color: #10b981; /* Hijau cerah (Emerald 500) */
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    box-shadow: 0 4px #047857; /* Hijau gelap */
-}
+        /* Usaha Pemeliharaan (Grounding) */
+        .grounding-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .grounding-table th {
+            background-color: #ffcc00; /* Header kuning */
+            text-align: left;
+            padding: 0.8rem;
+            border: 1px solid #000000;
+            font-weight: 900;
+        }
+        .grounding-table td {
+            border: 1px solid #000000;
+            padding: 0.8rem;
+        }
+        .grounding-table td input[type="text"] {
+            width: 60%;
+            padding: 0.9rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+            text-align: right;
+            border: 1px solid #94a3b8; /* Border input dikembalikan */
+        }
+        .grounding-value {
+            font-weight: 400;
+            color: #ef4444; 
+        }
+        
+        /* Bagian Tanda Tangan */
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .signature-box {
+            text-align: center;
+        }
+        .signature-box ol {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        .signature-box ol li input {
+            width: 80%;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            margin: 0.2rem 0;
+        }
+        .signature-area {
+            height: 60px; 
+            border-bottom: 1px solid #0f172a;
+            margin: 1rem auto;
+            width: 70%;
+        }
 
-.secondary-button:hover {
-    background-color: #059669;
-}
+        /* Tombol Aksi */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
